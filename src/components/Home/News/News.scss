@@ -1,0 +1,133 @@
+@import url('./.././../../assets/font/font.scss');
+
+.news-container {
+  width: 100vw;
+  padding-top: 200px;
+  background-color: #f8f8f8;
+  color: #543310;
+
+  .intro {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #543310;
+    margin-bottom: 80px;
+    img {
+      margin-left: 10px;
+      margin-bottom: 5px;
+      display: block;
+      scale: 1.8;
+      height: 120px;
+      width: 120px;
+    }
+    p {
+      font-size: 20px;
+      margin-left: 20px;
+      font-family: 'Raleway-Light';
+      text-transform: uppercase;
+      color: #543310;
+    }
+    h1 {
+      font-size: 55px;
+      margin-left: 20px;
+      font-family: 'Cinzel-Regular';
+    }
+  }
+  .book-event {
+    border: 1px solid #000000;
+    color: #000000;
+    height: 120px;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 70px;
+    border-radius: 50%;
+    font-family: 'Raleway-Light';
+    font-size: 20px;
+    &::before {
+      content: '';
+      position: absolute;
+      border: 1px solid #000000;
+      color: #000000;
+      height: 120px;
+      width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 70px 70px;
+      border-radius: 50%;
+      font-family: 'Raleway-Light';
+      font-size: 20px;
+      left: -8px;
+      top: -8px;
+    }
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+      &::before {
+        top: 0;
+        left: 0;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+  .news-item {
+    .news-image {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+      }
+    }
+    .news-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: 60px;
+      gap: 20px;
+      h1 {
+        font-family: 'Raleway-Bold';
+        font-size: 30px;
+      }
+      p {
+        font-family: 'Raleway-Light';
+        font-size: 17px;
+        width: 70%;
+      }
+      a {
+        position: relative;
+        &:hover {
+          text-decoration: none;
+          color: #74512d;
+          p::after {
+            width: 100%;
+            transition: width 0.3s ease-in-out; // Add transition for animation
+          }
+        }
+      }
+      a > p {
+        width: 100%;
+        position: relative; // Ensure p is positioned relative to a
+        &::after {
+          display: block;
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0px;
+          height: 3px; // Adjust height to match the border-bottom
+
+          background-color: #74512d; // Use background-color instead of border-bottom
+          width: 0px;
+          transition: width 0.3s ease-in-out; // Add transition for animation
+        }
+      }
+    }
+  }
+}

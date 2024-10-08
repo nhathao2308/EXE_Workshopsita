@@ -1,0 +1,38 @@
+@import url('./../../assets/font/font.scss');
+
+$font-content: 'Raleway-Bold';
+$font-regular: 'Raleway-Regular';
+$font-title: 'Raleway-Bold';
+
+.containerF {
+  .title {
+    font-family: $font-title;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 1;
+    font-size: 25px;
+    margin-bottom: 25px;
+    padding: 10px 0;
+    color: #543310;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    font-family: $font-content;
+    font-weight: 700;
+    padding: 0 0 7px 0;
+    color: #543310;
+  }
+
+  .content {
+    font-family: $font-regular;
+    font-size: 14px;
+    color: #543310;
+  }
+}
+h1 {
+  font-family: 'Cinzel-Bold';
+}
+.footer-logo {
+  margin-top: -100px;
+}

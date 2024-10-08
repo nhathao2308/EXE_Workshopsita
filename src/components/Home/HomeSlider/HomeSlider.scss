@@ -1,0 +1,45 @@
+.carousel-container {
+  height: 90vh; /* Ensure it has height */
+  overflow: hidden;
+
+  .ant-carousel {
+    height: 100%;
+    width: 100%;
+    .slick-arrow,
+    .slick-arrow:hover {
+      color: #af8f6f;
+      margin-top: -100px;
+    }
+    .slick-next,
+    .slick-next:hover {
+      margin-right: 20px;
+      margin-left: 0px;
+    }
+
+    .slick-prev,
+    .slick-prev:hover {
+      margin-left: 20px;
+      margin-right: 0px;
+    }
+  }
+
+  .image-container {
+    height: 100%;
+    width: 100%;
+    img {
+      object-fit: fill;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+.carousel-container .slick-slide {
+  display: block !important;
+  color: black;
+  /* Make sure the slides are visible */
+}
+
+.slick-dots {
+  display: block;
+}

@@ -1,0 +1,120 @@
+@import url('./../../assets/font/font.scss');
+
+$font-content: 'Nutri-Regular';
+$font-title: 'Nutri-Light';
+// $font-title: DM Serif Display, sans-serif;
+$brown-main-color: #74512d;
+
+#header {
+  z-index: 99999999;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: top 0.3s;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 0;
+
+  .ant-menu-overflow {
+    font-size: 17px;
+    font-family: $font-content;
+    background-color: #ffffff;
+  }
+
+  &.hidden {
+    top: -100px;
+  }
+
+  &.show {
+    top: 0;
+  }
+
+  .header-logo {
+    width: 18vw;
+    padding-top: 40px;
+    font-family: $font-title;
+  }
+
+  .login-btn {
+    margin-right: 3rem;
+    padding: 7px 25px;
+    background-color: #74512d;
+  }
+
+  .btn-user {
+    border-radius: 50%;
+    border: 0.6px solid #74512d;
+    padding: 0;
+    height: 50px;
+    width: 55px;
+    margin-right: 5rem;
+    background-color: #f8f4e1;
+    box-shadow: #74512d;
+    &:hover {
+      box-shadow: #74512d;
+      border: 1.5px solid #f8f4e1;
+      background-color: #74512d;
+    }
+
+    &.active {
+      // Style when dropdown is active
+      box-shadow: #74512d;
+      border: 1.5px solid #f8f4e1;
+      background-color: #74512d;
+    }
+  }
+  .menu-item {
+    &:hover {
+      color: #74512d;
+    }
+  }
+  :where(.ant-menu-light.ant-menu-horizontal) .ant-menu-item-selected::after {
+    color: $brown-main-color;
+    border-bottom-width: 4px;
+    border-bottom-color: $brown-main-color;
+  }
+
+  :where(.ant-menu-light.ant-menu-horizontal) .ant-menu-item-selected {
+    color: $brown-main-color;
+  }
+
+  :where(.ant-menu-light.ant-menu-horizontal) .ant-menu-item-active::after {
+    color: $brown-main-color;
+    border-bottom-width: 4px;
+    border-bottom-color: $brown-main-color;
+  }
+
+  :where(.ant-menu-light.ant-menu-horizontal) .ant-menu-item:hover::after {
+    color: $brown-main-color;
+    border-bottom-width: 4px;
+    border-bottom-color: $brown-main-color;
+  }
+
+  :where(.ant-menu-light.ant-menu-horizontal)
+    .ant-menu-submenu-selected::after {
+    color: $brown-main-color;
+    border-bottom-width: 4px;
+    border-bottom-color: $brown-main-color;
+  }
+
+  :where(.ant-menu-light.ant-menu-horizontal) .ant-menu-submenu-selected {
+    color: $brown-main-color;
+  }
+
+  :where(.ant-menu-light.ant-menu-horizontal) .ant-menu-submenu-active::after {
+    color: $brown-main-color;
+    border-bottom-width: 4px;
+    border-bottom-color: $brown-main-color;
+  }
+
+  :where(.ant-menu-light.ant-menu-horizontal) .ant-menu-submenu:hover::after {
+    color: $brown-main-color;
+    border-bottom-width: 4px;
+    border-bottom-color: $brown-main-color;
+  }
+  :where(.ant-menu-light.ant-menu-horizontal) .ant-menu-submenu-title:hover {
+    color: #74512d;
+  }
+}
