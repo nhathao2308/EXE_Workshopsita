@@ -1,0 +1,82 @@
+@import url('../../assets/font/font.scss');
+
+.search-container {
+  width: 100vw;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background-image: url('../../assets/image/cover_stu3.jpg');
+
+  background-size: contain;
+  background-size: cover;
+  background-position: center;
+  h1 {
+    font-size: 80px;
+    font-family: 'Cinzel-Bold';
+    color: #543310;
+  }
+  h3 {
+    font-size: 25px;
+    font-family: 'Raleway-SemiBold';
+    color: #543310;
+  }
+}
+
+.search-box {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 50px;
+  border: 2px solid #74512d;
+
+  box-shadow: 0 10px 30px rgba(133, 92, 38, 0.1);
+  width: 70vw;
+  .input-item {
+    margin: 0 10px;
+    flex-grow: 1;
+    max-width: 250px;
+    border-radius: 50px;
+    border: 1px solid #f0f0f0;
+
+    .ant-input,
+    .ant-select-selector,
+    .ant-picker {
+      border-radius: 50px;
+    }
+
+    // Adjust the placeholder text color and font-size inside input fields
+    .ant-input::placeholder,
+    .ant-picker-input input {
+      color: #f0f0f0 !important;
+      font-size: 16px !important;
+    }
+
+    // Remove border on focus for a cleaner look
+    &:focus-within {
+      border-color: #543310 !important;
+      box-shadow: 0 0 0 2px rgba(175, 143, 111, 0.2) !important ;
+    }
+  }
+
+  // Styling the button
+  .search-btn {
+    margin-left: 15px;
+    background-color: #543310;
+    color: #fff;
+    border-radius: 50px;
+    padding: 0 30px;
+    height: 50px;
+    font-size: 18px;
+
+    &:hover {
+      background-color: #f8f4e1 !important;
+      color: #543310 !important;
+    }
+  }
+}

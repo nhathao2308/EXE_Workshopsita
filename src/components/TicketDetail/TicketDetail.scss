@@ -1,0 +1,27 @@
+@import '../../assets/font/font.scss';
+.ticket-container {
+  background-color: #f8f4e1;
+  padding-top: 30px;
+  .infor {
+    font-family: 'Raleway-Regular';
+    .title {
+      font-size: 18px;
+      color: #543310;
+      font-family: 'Cinzel-Bold';
+      margin-bottom: 10px;
+    }
+  }
+  .description {
+    width: 400px;
+    padding: 0px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .qrCode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

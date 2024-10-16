@@ -12,10 +12,9 @@ import {
 } from '@ant-design/icons'
 import { LoginService } from '@/services/authAPI'
 
-const LoginForm = ({ handleFogot }) => {
+const LoginForm = () => {
   const [form] = Form.useForm()
   const [error, setError] = useState(null)
-  const location = useLocation()
   const navigate = useNavigate()
 
   const handleLoginSuccess = (data) => {
@@ -117,12 +116,12 @@ const LoginForm = ({ handleFogot }) => {
             }
           />
         </Form.Item>
-        <p style={{ width: '100%', textAlign: 'end' }}>
+        {/* <p style={{ width: '100%', textAlign: 'end' }}>
           <Link style={{ fontSize: '16px' }} onClick={handleFogot}>
             {' '}
             Forgot password
           </Link>
-        </p>
+        </p> */}
         <Form.Item>
           <Button
             type="primary"
