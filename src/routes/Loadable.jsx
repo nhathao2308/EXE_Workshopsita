@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {  Spin } from "antd";
 import { lazy, Suspense } from "react";
 // import LoadingScreen from "../components/Loading";

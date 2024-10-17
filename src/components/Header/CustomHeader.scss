@@ -66,8 +66,10 @@ $brown-main-color: #74512d;
     }
   }
   .menu-item {
+    width: fit-content;
     &:hover {
       color: #74512d;
+      width: fit-content;
     }
   }
   :where(.ant-menu-light.ant-menu-horizontal) .ant-menu-item-selected::after {

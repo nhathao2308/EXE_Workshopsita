@@ -1,12 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Layout, theme } from "antd";
-import CustomFooter from "@/components/Footer/CustomFooter";
-import CustomHeader from "@/components/Header/CustomHeader";
-import Guide from "@/components/Home/Guide/Guide";
-import HomeSlider from "@/components/Home/HomeSlider/HomeSlider";
-import Workshop from "@/components/Home/Workshop/Workshop";
-import News from "@/components/Home/News/News";
-import Search from "antd/es/transfer/search";
+import CustomHeader from "../components/Header/CustomHeader";
+import CustomFooter from "../components/Footer/CustomFooter";
 
 const { Header, Sider, Content } = Layout;
 
@@ -15,7 +10,7 @@ const MainLayout = ({ showFooter = true }) => {
     token: { colorBgContainer, borderRadiusLG, ...other },
   } = theme.useToken();
   return (
-    <Layout id="layout-body" style={{ backgroundColor: "#ffffff" }}>
+    <Layout id="layout-body" style={{ backgroundColor: '#ffffff' }}>
       <CustomHeader />
       <Content
         style={{
@@ -25,10 +20,6 @@ const MainLayout = ({ showFooter = true }) => {
         }}
       >
         <Outlet />
-        {/* <Workshop /> */}
-        {/* <News /> */}
-        {/* <Search /> */}
-        {/* <Guide /> */}
       </Content>
       {showFooter && <CustomFooter />}
     </Layout>

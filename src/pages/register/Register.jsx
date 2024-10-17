@@ -1,53 +1,46 @@
 import {
   Button,
   Col,
+  DatePicker,
   Form,
   Image,
   Input,
   Layout,
+  Radio,
   Row,
+  Space,
   message,
-  Modal
 } from 'antd'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 // import { useAddUserMutation } from '../../services/userAPI';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import './Register.scss'
 import imager from '../../assets/image/register.jpg'
-import { validationPatterns } from '@/utils/utils'
-import { RegisterService, VerifyOtpService } from '@/services/authAPI'
-import { useState } from 'react'
+import { validationPatterns } from '../../utils/utils'
+import { useRegisterUserMutation } from '../../services/authAPI'
+import dayjs from 'dayjs'
 
 const Register = () => {
   const [form] = Form.useForm()
+  const [registerUser, { isLoading }] = useRegisterUserMutation()
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState('')
-  const [otp, setOtp] = useState('')
-
-  const [open, setOpen] = useState(false)
-
-  const handleSubmitOtp = async () => {
-    console.log(otp)
-    console.log(email)
-    await VerifyOtpService(otp, email)
-    message.success('Register successfully')
-    navigate('/login')
-  }
-
   const handleSubmit = async (values) => {
-    const user = await RegisterService(values)
-    if (user.success == false) {
-      message.error(user.errors[0])
-      return
+    try {
+      const user = await registerUser(values)
+      // console.log(user.error.data.message);
+      if (user.error) {
+        message.error(user.error.data.message)
+        return
+      }
+      message.success(user.data.message)
+      form.resetFields()
+      navigate('/login')
+      console.log(user)
+    } catch (error) {
+      console.log(error)
     }
-    message.success(user.data)
-    form.resetFields()
-    setOpen(true)
-  }
-
-  const handleCancel = () => {
-    setOpen(false)
   }
 
   return (
@@ -65,70 +58,48 @@ const Register = () => {
                   hasFeedback
                   label="Email"
                   name="email"
-                  value={email}
-                  onChange={(event) => {
-                    setEmail(event.target.value)
-                  }}
                   rules={[
                     {
                       required: true,
                       pattern: validationPatterns.email.pattern,
-                      message: validationPatterns.email.message
-                    }
+                      message: validationPatterns.email.message,
+                    },
                   ]}
                 >
                   <Input type="" placeholder="Email" className="form-input" />
                 </Form.Item>
                 <Form.Item
                   hasFeedback
-                  label="First name"
-                  name="firstname"
+                  label="Full name"
+                  name="fullname"
                   rules={[
                     {
                       required: true,
                       pattern: validationPatterns.name.pattern,
-                      message: validationPatterns.name.message
-                    }
+                      message: validationPatterns.name.message,
+                    },
                   ]}
                 >
                   <Input
                     type=""
-                    placeholder="First name"
+                    placeholder="Full name"
                     className="form-input"
                   />
                 </Form.Item>
                 <Form.Item
                   hasFeedback
-                  label="Last name"
-                  name="lastname"
-                  rules={[
-                    {
-                      required: true,
-                      pattern: validationPatterns.name.pattern,
-                      message: validationPatterns.name.message
-                    }
-                  ]}
-                >
-                  <Input
-                    type=""
-                    placeholder="Last name"
-                    className="form-input"
-                  />
-                </Form.Item>
-                {/* <Form.Item
-                  hasFeedback
                   label="Address"
                   name="address"
                   rules={[
                     {
-                      required: true
+                      required: true,
                       //     pattern: validationPatterns.name.pattern,
                       //     message: validationPatterns.name.message,
-                    }
+                    },
                   ]}
                 >
                   <Input type="" placeholder="Address" className="form-input" />
-                </Form.Item> */}
+                </Form.Item>
                 <Form.Item
                   hasFeedback
                   label="Phone number"
@@ -137,8 +108,8 @@ const Register = () => {
                     {
                       required: true,
                       pattern: validationPatterns.phoneNumber.pattern,
-                      message: validationPatterns.phoneNumber.message
-                    }
+                      message: validationPatterns.phoneNumber.message,
+                    },
                   ]}
                 >
                   <Input
@@ -148,7 +119,7 @@ const Register = () => {
                   />
                 </Form.Item>
 
-                {/* <Form.Item
+                <Form.Item
                   hasFeedback
                   label="Gender"
                   name="gender"
@@ -190,8 +161,8 @@ const Register = () => {
                             )
                           }
                         }
-                      }
-                    })
+                      },
+                    }),
                   ]}
                 >
                   <DatePicker
@@ -210,7 +181,7 @@ const Register = () => {
                       }
                     }}
                   />
-                </Form.Item> */}
+                </Form.Item>
                 <Form.Item
                   hasFeedback
                   label="Password"
@@ -219,8 +190,8 @@ const Register = () => {
                     {
                       required: true,
                       pattern: validationPatterns.password.pattern,
-                      message: validationPatterns.password.message
-                    }
+                      message: validationPatterns.password.message,
+                    },
                   ]}
                 >
                   <Input.Password
@@ -245,8 +216,8 @@ const Register = () => {
                         return Promise.reject(
                           new Error('The passwords do not match!')
                         )
-                      }
-                    })
+                      },
+                    }),
                   ]}
                 >
                   <Input.Password
@@ -280,9 +251,8 @@ const Register = () => {
                     <Button
                       style={{ backgroundColor: '#543310' }}
                       className="w-36  h-14"
-                      htmlType="submit"
                       type="primary"
-                      loading={false}
+                      loading={isLoading}
                     >
                       Register
                     </Button>
@@ -306,62 +276,6 @@ const Register = () => {
           </div>
         </Col>
       </Row>
-      <Modal
-        open={open}
-        title="Please enter Otp that we sent to your email !!!"
-        onCancel={handleCancel}
-        footer={
-          [
-            // <Button key="back" onClick={handleCancel}>
-            //   Return
-            // </Button>,
-            // <Button
-            //   key="submit"
-            //   type="primary"
-            //   loading={loading}
-            //   onClick={handleOk}
-            // >
-            //   Submit
-            // </Button>
-          ]
-        }
-      >
-        <Form form={form} onFinish={handleSubmitOtp} className="mt-5">
-          <Form.Item
-            hasFeedback
-            label="Otp"
-            name="otp"
-            value={otp}
-            onChange={(event) => {
-              setOtp(event.target.value)
-            }}
-            rules={[
-              {
-                required: true,
-                pattern: validationPatterns.Otp.pattern,
-                message: validationPatterns.Otp.message
-              }
-            ]}
-          >
-            <Input type="" placeholder="Otp" className="form-input" />
-          </Form.Item>
-
-          <Form.Item>
-            <div className="flex items-center  align-baseline justify-end">
-              <Button
-                style={{ backgroundColor: '#543310' }}
-                className="w-30  h-10 "
-                htmlType="submit"
-                type="primary"
-                loading={false}
-              >
-                Submit
-              </Button>
-            </div>
-            {/* )} */}
-          </Form.Item>
-        </Form>
-      </Modal>
     </Layout>
   )
 }

@@ -1,13 +1,12 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { selectUsers } from "../slices/auth.slice";
-import RoleConst from "@/constant/userRole.const";
+import { selectCurrentUser } from "../slices/auth.slice";
 
 const AdminGuard = () => {
-  const user = useSelector(selectUsers);
+  const user = useSelector(selectCurrentUser);
   const location = useLocation();
 
-  if (user?.role !== RoleConst.ADMIN) {
+  if (user?.roleId !== 1) {
     return <Navigate to="/404" replace />;
   }
 

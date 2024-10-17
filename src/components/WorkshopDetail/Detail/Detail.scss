@@ -141,6 +141,7 @@
       height: 100%;
       margin-top: 10px;
       h1 {
+        padding-left: 0px;
         font-family: 'Raleway-Bold';
         font-size: 25px;
       }
@@ -158,10 +159,56 @@
     h1 {
       font-family: 'Raleway-Bold';
       font-size: 30px;
+      padding-left: 0px;
     }
     p {
       font-family: 'Raleway-Regular';
       font-size: 18px;
+    }
+  }
+  h1 {
+    font-family: 'Raleway-Bold';
+    font-size: 30px;
+    padding-left: 80px;
+    color: #543310;
+  }
+  .feedback {
+    padding: 0px 80px;
+    padding-top: 0px;
+    color: #543310;
+    .content {
+      margin: 20px 0px;
+    }
+    h1 {
+      font-family: 'Raleway-Bold';
+      font-size: 30px;
+    }
+    p {
+      font-family: 'Raleway-Regular';
+      font-size: 18px;
+    }
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 30px;
+      h3 {
+        font-family: 'Raleway-Bold';
+        font-size: 15px;
+      }
+      .ava {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 1px solid #543310;
+        margin-right: 10px;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
     }
   }
 }

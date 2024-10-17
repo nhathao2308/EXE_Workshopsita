@@ -1,0 +1,17 @@
+.custom-search .ant-input-search-button {
+  background-color: #af8f6f; /* Custom background color */
+  border: none; /* Remove border */
+  color: #fff; /* Optional: Change text color */
+  height: 31.7px;
+
+  &:hover {
+    background-color: hsl(30, 44%, 32%) !important; /* Hover background color */
+    color: #f8f4e1; /* Hover text color */
+  }
+}
+
+/* Increased specificity for hover effect */
+.custom-search .ant-input-search-button:hover {
+  background-color: hsl(30, 44%, 32%) !important;
+  color: #f8f4e1;
+}

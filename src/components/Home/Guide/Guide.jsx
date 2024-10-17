@@ -1,3 +1,5 @@
+import React from 'react'
+
 import './Guide.scss'
 import { Row, Col } from 'antd'
 import logo from '../../../assets/image/logo_square_bg.png'
