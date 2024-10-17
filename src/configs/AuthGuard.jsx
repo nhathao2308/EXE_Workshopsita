@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { selectCurrentToken } from "../slices/auth.slice";
+import { selectUsers } from "../slices/auth.slice";
 
 const AuthGuard = () => {
-  const token = useSelector(selectCurrentToken);
+  const token = useSelector(selectUsers);
   const location = useLocation();
 
   if (!token) {

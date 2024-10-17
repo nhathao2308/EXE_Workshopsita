@@ -10,13 +10,13 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import authSlice from "@/stores/authSlice";
+import authSlice from "@/slices/auth.slice";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: [],
+  whitelist: ["auth"],
   blacklist: [],
 };
 
@@ -36,4 +36,4 @@ export const store = configureStore({
     }),
 });
 
-export let persistor = persistStore(store);
+export const persistor = persistStore(store);
