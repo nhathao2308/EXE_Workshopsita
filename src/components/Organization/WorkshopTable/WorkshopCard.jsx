@@ -7,7 +7,7 @@ import {
   SettingOutlined,
 } from '@ant-design/icons'
 import { Avatar, Card, Descriptions } from 'antd'
-import ws1 from '../../../assets/image/wslist_1.jpg'
+import ws1 from '../../../assets/image/ws_cafe.png'
 import { style } from 'framer-motion/client'
 
 function WorkshopCard() {

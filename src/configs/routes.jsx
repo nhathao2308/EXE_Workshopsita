@@ -4,6 +4,7 @@ import MainLayout from '../layout/MainLayout'
 import AuthGuard from './AuthGuard'
 import AdminGuard from './AdminGuard'
 import ManagerGuard from './ManagerGuard'
+import AdminLayout from '@/layout/AdminLayout'
 
 const Login = Loadable({ loader: () => import('../pages/login/Login') })
 const Register = Loadable({
@@ -27,6 +28,16 @@ const WSDettail = Loadable({
 
 const AboutUs = Loadable({
   loader: () => import('../pages/AboutUs/AboutUs'),
+})
+const OrganizerHome = Loadable({
+  loader: () => import('../pages/Organizer/OrganizerPage'),
+})
+
+const UpdateWorkshop = Loadable({
+  loader: () => import('../pages/Organizer/ManagePage'),
+})
+const CreateWorkshop = Loadable({
+  loader: () => import('../pages/Organizer/CreateWorkshop'),
 })
 // const ManageProducts = Loadable({
 //   loader: () => import("../pages/manage/ManageProducts"),
