@@ -1,48 +1,77 @@
-import { createBrowserRouter } from "react-router-dom";
-import Loadable from "./Loadable";
-import MainLayout from "../layout/MainLayout";
-import AuthGuard from "./AuthGuard";
-import AdminGuard from "./AdminGuard";
-import ManagerGuard from "./ManagerGuard";
+import { createBrowserRouter } from 'react-router-dom'
+import Loadable from './Loadable'
+import MainLayout from '../layout/MainLayout'
+import AuthGuard from './AuthGuard'
+import AdminGuard from './AdminGuard'
+import ManagerGuard from './ManagerGuard'
+import AdminLayout from '@/layout/AdminLayout'
 
-const Login = Loadable({ loader: () => import("../pages/login/Login") });
+const Login = Loadable({ loader: () => import('../pages/login/Login') })
 const Register = Loadable({
-  loader: () => import("../pages/register/Register"),
-});
+  loader: () => import('../pages/register/Register'),
+})
 const Profile = Loadable({
-  loader: () => import("../pages/profile/profile"),
-});
+  loader: () => import('../pages/profile/profile'),
+})
 const Home = Loadable({
-  loader: () => import("../pages/dashboard/Dashboard"),
-});
+  loader: () => import('../pages/dashboard/Dashboard'),
+})
 const Admin = Loadable({
-  loader: () => import("../pages/admin/Admin"),
-});
+  loader: () => import('../pages/admin/Admin'),
+})
 const WorkshopList = Loadable({
-  loader: () => import("../pages/WorkshopList/WorkshopList"),
-});
+  loader: () => import('../pages/WorkshopList/WorkshopList'),
+})
 const WSDettail = Loadable({
-  loader: () => import("../pages/WSDetailPage/WSDettail"),
-});
+  loader: () => import('../pages/WSDetailPage/WSDettail'),
+})
 
 const AboutUs = Loadable({
-  loader: () => import("../pages/AboutUs/AboutUs"),
-});
+  loader: () => import('../pages/AboutUs/AboutUs'),
+})
+const OrganizerHome = Loadable({
+  loader: () => import('../pages/Organizer/OrganizerPage'),
+})
+
+const UpdateWorkshop = Loadable({
+  loader: () => import('../pages/Organizer/ManagePage'),
+})
+const CreateWorkshop = Loadable({
+  loader: () => import('../pages/Organizer/CreateWorkshop'),
+})
 // const ManageProducts = Loadable({
 //   loader: () => import("../pages/manage/ManageProducts"),
 // });
 
 export const router = createBrowserRouter([
   {
-    path: "/login",
+    path: '/login',
     element: Login,
   },
   {
-    path: "/register",
+    path: '/register',
     element: Register,
   },
   {
-    path: "/",
+    path: '/',
+    element: <AdminLayout />,
+    children: [
+      {
+        path: 'organizerhome',
+        element: OrganizerHome,
+      },
+      {
+        path: 'update-workshop',
+        element: UpdateWorkshop,
+      },
+      {
+        path: 'create-workshop',
+        element: CreateWorkshop,
+      },
+    ],
+  },
+  {
+    path: '/',
     element: <MainLayout showFooter={false} />,
     children: [
       {
@@ -50,23 +79,23 @@ export const router = createBrowserRouter([
         element: Home,
       },
       {
-        path: "workshop-list",
+        path: 'workshop-list',
         element: WorkshopList,
       },
       {
-        path: "workshop-detail",
+        path: 'workshop-detail',
         element: WSDettail,
       },
       {
-        path: "about-us",
+        path: 'about-us',
         element: AboutUs,
       },
       {
-        path: "profile",
+        path: 'profile',
         element: Profile,
       },
       {
-        path: "/",
+        path: '/',
         element: <AuthGuard />,
         children: [
           {
@@ -74,13 +103,13 @@ export const router = createBrowserRouter([
             element: Home,
           },
           {
-            path: "profile",
+            path: 'profile',
             element: Profile,
           },
         ],
       },
       {
-        path: "admin",
+        path: 'admin',
         element: <AuthGuard />,
         children: [
           {
@@ -96,7 +125,7 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "manage-products",
+        path: 'manage-products',
         element: <AuthGuard />,
         children: [
           {
@@ -114,7 +143,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "*",
+    path: '*',
     element: <div>ERROR</div>,
   },
-]);
+])

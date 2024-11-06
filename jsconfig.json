@@ -1,9 +1,12 @@
 {
-    "compilerOptions": {
-      "baseUrl": "./",
-      "paths": {
-        "@/*": ["src/*"],
-      }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"], // Maps @ to src directory
+      "utils": ["src/lib/utils"], // Maps utils to lib/utils
+      "components/*": ["src/components/*"], // Maps components to src/components
+      "ui/*": ["src/components/ui/*"], // Maps ui to src/components/ui
+      "services/*": ["src/services/*"] // Maps services to src/services
     }
+  }
 }
-  
