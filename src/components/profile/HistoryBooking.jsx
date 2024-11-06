@@ -1,54 +1,54 @@
-import React from 'react';
-import { Table } from 'antd';
+import React from 'react'
+import { Table, Space, Tabs, ConfigProvider } from 'antd'
+import { title } from 'framer-motion/client'
+import TableTicket from './TableTicket'
 
 const HistoryBooking = () => {
-    const columns = [
-        {
-            title: 'Booking ID',
-            dataIndex: 'id',
-            key: 'id',
+  const onChange = (key) => {
+    console.log(key)
+  }
+  const items = [
+    {
+      key: '1',
+      label: 'All',
+      children: <TableTicket />,
+    },
+    {
+      key: '2',
+      label: 'On-going',
+      children: <TableTicket />,
+    },
+    {
+      key: '3',
+      label: 'Completed',
+      children: <TableTicket />,
+    },
+    {
+      key: '4',
+      label: 'Cancelled',
+      children: <TableTicket />,
+    },
+  ]
+  return (
+    <ConfigProvider
+      theme={{
+        components: {
+          Tabs: {
+            itemColor: '#74512D',
+            itemHoverColor: '#74512D',
+            itemSelectedColor: '#74512d',
+            itemSelectedBg: '#74512D',
+            inkBarColor: '#74512D',
+          },
         },
-        {
-            title: 'Service',
-            dataIndex: 'service',
-            key: 'service',
-        },
-        {
-            title: 'Date',
-            dataIndex: 'date',
-            key: 'date',
-        },
-        {
-            title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
-        },
-    ];
+      }}
+    >
+      <div style={{ color: '#74512D' }}>
+        <h2 className="text-2xl font-semibold mb-6">My ticket</h2>
+        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+      </div>
+    </ConfigProvider>
+  )
+}
 
-    const data = [
-        {
-            key: '1',
-            id: '12345',
-            service: 'Clinical Psychology',
-            date: '2023-01-01',
-            status: 'Completed',
-        },
-        {
-            key: '2',
-            id: '12346',
-            service: 'Marriage and Family Therapy',
-            date: '2023-02-15',
-            status: 'Pending',
-        },
-        // Add more data as needed
-    ];
-
-    return (
-        <div>
-            <h2 className="text-2xl font-semibold mb-6">History Booking</h2>
-            <Table columns={columns} dataSource={data} pagination={false} />
-        </div>
-    );
-};
-
-export default HistoryBooking;
+export default HistoryBooking

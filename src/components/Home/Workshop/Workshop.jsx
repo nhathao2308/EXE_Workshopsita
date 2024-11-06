@@ -1,20 +1,22 @@
-import { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { fadeIn } from '../../Animation/variant'
-import { Row, Col, Flex } from 'antd'
+import { Row, Col, Flex, Button, ConfigProvider } from 'antd'
 import './Workshop.scss'
 import logo from '../../../assets/image/logo_square_bg.png'
 import ws1 from '../../../assets/image/ws_cafe.png'
 import ws2 from '../../../assets/image/ws_coktail.png'
 import ws3 from '../../../assets/image/ws_ncdt.png'
+
 import { motion, useScroll, useTransform } from 'framer-motion'
 const Workshop = () => {
   const ref = useRef(null)
-
+  const navigate = useNavigate()
   // Use the scroll position of the element
   const { scrollYProgress } = useScroll({
     target: ref, // Track the scrolling within the 'component-container'
-    offset: ['start end', 'end start'] // Start and end positions for the animation
+    offset: ['start end', 'end start'], // Start and end positions for the animation
   })
 
   // Animate opacity and position based on scroll progress
@@ -36,7 +38,7 @@ const Workshop = () => {
         </Col>
         <Col span={5}>
           <div className="book-event">
-            <a href="/workshop">Book event</a>
+            <a href="/workshop-list">Book event</a>
           </div>
         </Col>
       </Row>
@@ -51,7 +53,7 @@ const Workshop = () => {
             <img src={ws1} alt="ws1" />
           </div>
           <div className="workshop-title">
-            <a to="/workshop">
+            <a href="/workshop-list">
               {' '}
               <h2>HARD DRIP DAY WORKSHOP IN HO CHI MINH CITY</h2>
             </a>
@@ -68,14 +70,14 @@ const Workshop = () => {
             style={{
               y, // Y-position transforms based on scroll progress
               height: '100%',
-              width: '100%'
+              width: '100%',
             }}
           >
             <div className="workshop-poster">
               <img src={ws2} alt="ws1" />
             </div>
             <div className="workshop-title">
-              <a href="/workshop">
+              <a href="/workshop-detail">
                 {' '}
                 <h2>HARD DRIP DAY WORKSHOP</h2>
               </a>
@@ -89,7 +91,7 @@ const Workshop = () => {
               <img src={ws3} alt="ws1" />
             </div>
             <div className="workshop-title">
-              <a href="/workshop">
+              <a href="/workshop-detail">
                 {' '}
                 <h2>HARD DRIP DAY WORKSHOP</h2>
               </a>
@@ -102,10 +104,15 @@ const Workshop = () => {
         style={{
           display: Flex,
           justifyContent: 'center ',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
-        <button className="workshop-btn">View All Workshop</button>
+        <button
+          className="workshop-btn"
+          onClick={() => navigate('/workshop-list')}
+        >
+          View All Workshop
+        </button>
       </Row>
     </div>
   )

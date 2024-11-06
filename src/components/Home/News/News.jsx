@@ -1,3 +1,4 @@
+import React from 'react'
 import { Row, Col } from 'antd'
 import logo from '../../../assets/image/logo_square_bg.png'
 import './News.scss'

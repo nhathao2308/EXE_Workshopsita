@@ -1,49 +1,49 @@
-import { useState } from "react";
-import { Form, Input, Button, Alert, notification } from "antd";
-import "./Login.scss";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Form, Input, Button, Alert, notification, message } from 'antd'
+import './Login.scss'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
+  LockFilled,
   LockOutlined,
+  SmileFilled,
   SmileOutlined,
   UserOutlined,
-} from "@ant-design/icons";
-import { LoginService } from "@/services/authAPI";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "@/slices/auth.slice";
+} from '@ant-design/icons'
+import { useLoginUserMutation } from '../../services/authAPI'
+import { setToken, setUser } from '../../slices/auth.slice'
 
-const LoginForm = () => {
-  const [form] = Form.useForm();
-  const [error, setError] = useState(null);
-  const dispatch = useDispatch();
+const LoginForm = ({ handleFogot }) => {
+  const [form] = Form.useForm()
+  const [error, setError] = useState(null)
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
 
-  const navigate = useNavigate();
+  const [loginUser, { isLoading }] = useLoginUserMutation()
 
-  const handleLoginSuccess = (data) => {
-    const token = data.token;
-    const refreshToken = data.refreshToken;
-    const user = { ...data.user, refreshToken: refreshToken };
+  // const handleLoginSuccess = (data) => {
+  //   const user = data.data.user
+  //   const token = data.data.token
 
-    dispatch(
-      setCredentials({
-        user: user,
-        accessToken: token,
-      })
-    );
+  //   dispatch(setUser(user))
+  //   dispatch(setToken(token))
 
-    notification.success({
-      message: "Login successfully",
-      duration: 2,
-      description: (
-        <div>
-          Welcome <SmileOutlined />
-        </div>
-      ),
-    });
+  //   notification.success({
+  //     message: 'Login successfully',
+  //     duration: 2,
+  //     description: (
+  //       <div>
+  //         Welcome {user.userName} <SmileOutlined />
+  //       </div>
+  //     ),
+  //   })
 
-    navigate("/");
-  };
+  //   const from = location.state?.from || '/'
+  //   navigate(from)
+  // }
 
   // const handleLoginFailure = (error, email) => {
   //   if (error.data) {
@@ -61,23 +61,23 @@ const LoginForm = () => {
   // }
 
   const handleSubmit = async (values) => {
-    try {
-      const result = await LoginService({
-        username: values.email,
-        password: values.password,
-      });
-      console.log(result);
-      if (result.data) {
-        handleLoginSuccess(result.data.data);
-      } else {
-        // handleLoginFailure(result.error, values.email)
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      // message.error('An unexpected error occurred. Please try again later.')
-    }
-    // navigate('/')
-  };
+    // try {
+    //   const result = await loginUser({
+    //     email: values.email,
+    //     password: values.password,
+    //   })
+    //   console.log(result)
+    //   if (result.data) {
+    //     handleLoginSuccess(result.data)
+    //   } else {
+    //     handleLoginFailure(result.error, values.email)
+    //   }
+    // } catch (error) {
+    //   console.error('Login error:', error)
+    //   message.error('An unexpected error occurred. Please try again later.')
+    // }
+    navigate('/')
+  }
 
   return (
     <div className="form-container">
@@ -91,9 +91,9 @@ const LoginForm = () => {
           </>
         )}
         <Form.Item
-          style={{ marginBottom: "2rem" }}
+          style={{ marginBottom: '2rem' }}
           name="email"
-          rules={[{ required: true, message: "Please input your Email" }]}
+          rules={[{ required: true, message: 'Please input your Email' }]}
           // rules={[
           //   {
           //     required: true,
@@ -112,7 +112,7 @@ const LoginForm = () => {
 
         <Form.Item
           name="password"
-          rules={[{ required: true, message: "Please input your password" }]}
+          rules={[{ required: true, message: 'Please input your password' }]}
         >
           <Input.Password
             placeholder="  Password"
@@ -124,19 +124,19 @@ const LoginForm = () => {
             }
           />
         </Form.Item>
-        {/* <p style={{ width: '100%', textAlign: 'end' }}>
+        <p style={{ width: '100%', textAlign: 'end' }}>
           <Link style={{ fontSize: '16px' }} onClick={handleFogot}>
             {' '}
             Forgot password
           </Link>
-        </p> */}
+        </p>
         <Form.Item>
           <Button
             type="primary"
             htmlType="submit"
-            loading={false}
+            loading={isLoading}
             size="large"
-            style={{ backgroundColor: "#543310" }}
+            style={{ backgroundColor: '#543310' }}
             // className="submit-btn"
             className="w-full mt-6 h-14"
           >
@@ -145,7 +145,7 @@ const LoginForm = () => {
         </Form.Item>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

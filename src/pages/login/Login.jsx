@@ -2,32 +2,83 @@ import {
   Button,
   Col,
   Divider,
+  Flex,
   Form,
   Image,
   Input,
   Layout,
+  message,
   Row,
+  Space,
 } from 'antd'
 import './../../components/login/Login.scss'
+import { useSelector } from 'react-redux'
+// import { selectCurrenToken } from "../../slices/auth.slice";
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { BackwardOutlined, LoadingOutlined } from '@ant-design/icons'
 import imager from '../../assets/image/login.jpg'
 import LoginForm from '../../components/login/FormLogin.jsx'
-import { useForm } from 'react-hook-form'
-
+import { selectCurrentToken } from '../../slices/auth.slice.js'
+import {
+  useResetPasswordMutation,
+  useVerifyOtpMutation,
+} from '../../services/authAPI.js'
+import { useForm } from 'antd/es/form/Form.js'
+import { width } from '@fortawesome/free-solid-svg-icons/fa0'
 function Login() {
+  const token = useSelector(selectCurrentToken)
   const navigate = useNavigate()
   const [isSendOTP, setIsSendOTP] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingSendOTP, setIsLoadingSendOTP] = useState(false)
   const [isLoadingResetPassword, setIsLoadingResetPassword] = useState(false)
   const [isFogotPasswords, setIsFogotPasswords] = useState(false)
-  // const [form] = useForm()
+  const [sendOtp, { isLoadingSending }] = useVerifyOtpMutation()
+  const [resetPas] = useResetPasswordMutation()
+  const [form] = useForm()
+  useEffect(() => {
+    if (token) {
+      navigate('/')
+    }
+  }, [token, navigate])
 
   const setFogotPassword = () => {
     setIsFogotPasswords(!isFogotPasswords)
+  }
+
+  const handleSendOtp = async (values) => {
+    setIsLoadingSendOTP(true)
+    try {
+      const response = await sendOtp(values).unwrap()
+      console.log(response)
+      if (response.code == 200) {
+        setIsSendOTP(true)
+      }
+    } catch (error) {
+      console.error('Failed to send OTP:', error)
+    } finally {
+      setIsLoadingSendOTP(false)
+    }
+  }
+
+  const handleResetPass = async (values) => {
+    setIsLoadingResetPassword(true)
+    try {
+      const response = await resetPas({
+        token: values.otp,
+        newPassword: values.newPassword,
+      }).unwrap()
+      console.log(response)
+      message.success('Password reset successful! ')
+      setFogotPassword()
+      form.resetFields()
+    } catch (error) {
+      console.error('Failed to send OTP:', error)
+    } finally {
+      setIsLoadingResetPassword(false)
+    }
   }
 
   return (
@@ -76,7 +127,7 @@ function Login() {
                         <h1 className="title-login">Forgot Password</h1>
                         <div className="form-login">
                           {!isSendOTP ? (
-                            <Form>
+                            <Form onFinish={handleSendOtp}>
                               <Form.Item
                                 name="email"
                                 rules={[
@@ -99,7 +150,7 @@ function Login() {
                               </Button>
                             </Form>
                           ) : (
-                            <Form>
+                            <Form onFinish={handleResetPass}>
                               <Form.Item
                                 name="otp"
                                 rules={[

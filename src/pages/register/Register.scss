@@ -1,6 +1,6 @@
-@import url('../../assets/font/font.scss');
+
 .register-layout {
-  background-image: url('../../assets/back-ground-image.jpg');
+  background-image: import('../../assets/back-ground-image.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;

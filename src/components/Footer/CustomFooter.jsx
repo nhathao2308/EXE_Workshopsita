@@ -1,4 +1,5 @@
-import { Layout, Row, Col, Image, Button } from 'antd'
+import React from 'react'
+import { Layout, Row, Col, Divider, Image, Input, Button } from 'antd'
 import logo from './../../assets/image/logo_square_bg.png'
 const { Footer } = Layout
 import './Footer.scss'
@@ -6,8 +7,10 @@ import {
   FacebookFilled,
   InstagramFilled,
   PhoneFilled,
+  PhoneOutlined,
   SendOutlined,
 } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
 function CustomFooter() {
   return (
@@ -17,12 +20,13 @@ function CustomFooter() {
         color: '#543310',
         padding: '100px 50px 80px 0px',
         marginLeft: -44,
+        marginTop: '150px',
       }}
     >
       <Row justify={'space-between'} style={{ margin: '0 100px' }}>
         <Col span={5} className="footer-logo">
-          <Image style={{}} src={logo} preview={false} />
-          <h1 style={{ fontSize: 22, marginTop: -100, textAlign: 'center' }}>
+          <Image style={{ marginTop: '50px' }} src={logo} preview={false} />
+          <h1 style={{ fontSize: 22, marginTop: -80, textAlign: 'center' }}>
             Workshopista
           </h1>
         </Col>
@@ -45,7 +49,7 @@ function CustomFooter() {
               </div>
               <div>
                 <p className="subtitle">Call us</p>
-                <p>0911623890</p>
+                <p>0369457827</p>
               </div>
             </div>
             <div
@@ -71,7 +75,7 @@ function CustomFooter() {
               </div>
               <div>
                 <p className="subtitle">Send us an Email</p>
-                <p>worshopista@gmail.com</p>
+                <p>theworkshopista@gmail.com</p>
               </div>
             </div>
           </div>
